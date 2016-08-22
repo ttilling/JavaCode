@@ -34,7 +34,7 @@ public class Pi {
 		for ( int k=0; k<N; k++) {
 			Real term = tempTerm.divide(Real.valueOf(2*k+1));
 			pi = pi.plus(term);
-			tempTerm = tempTerm.divide(Real.valueOf(-3.0));
+			tempTerm = tempTerm.divide(Real.valueOf(-3));
 		}
 		System.out.println(pi.toString());//.substring(0, digits+2));
 		System.out.println(pi.getPrecision());
