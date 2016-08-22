@@ -2,6 +2,9 @@ import project1.daVinci;
 import project1.DaVinciFactory;
 
 /*
+ * Copyright (c) 2016, Tom Tillinghast. All rights reserved.
+ * 
+ *
  * DaVinciExample -- a class demonstrating a simple example of the daVinci interface.
  */
 public class DaVinciExample {

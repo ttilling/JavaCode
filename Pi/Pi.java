@@ -1,39 +1,43 @@
 import org.jscience.mathematics.number.Real;
 
 /*
- * An Indian from the 14th century gives us this one.
+ * Copyright (c) 2016, Tom Tillinghast. All rights reserved.
  * 
- * @author TomT
+ * Approximating pi using 14th century method
+ * 
+ * pi ?= (12^1/2) * SUM[ (-1/3)^k / (2k+1)]
+ *        rootTwelve       A           B
+ * 
+ * 
+ * nextTerm = A / (2k+1)
  */
-
 public class Pi {
+	
+	/*
+	 * 
+	 */
+	static int digits = 200;
+	static int N = digits*3;
 
-	public static Real threePower(int i) {
-		if( i==0)
-			return Real.valueOf(1);
-		Real r = Real.valueOf(3);
-		return r.pow(i);
-	}
 	public static void main(String[] args) {
-		Real p = Real.valueOf(0);
-		int digits = 4002;
-		Real.setExactPrecision(digits);
-		int n=500;
-		
-		for ( int i=0; i<n; i++) {
-			int numerator=1;
-			if ( i%2 == 1)
-				numerator =-1;
-			Real term = Real.valueOf(numerator);
-			Real denom = Real.valueOf(2*i+1);
-			denom = denom.times(threePower(i));
-			term = term.divide(denom);
-			p=p.plus(term);
+		Real.setExactPrecision(N+50);
+		Real rootTwelve = Real.valueOf(12);
+			rootTwelve = rootTwelve.sqrt();
+			
+		Real pi = Real.valueOf(0);
+		Real tempTerm = rootTwelve.copy();
+		/*
+		 * we will use tempTerm = (12^1/2) * (-1/3)^k.
+		 *    this will be made consistent by dividng by -3 each time.
+		 * then term (the actual term in the summation) will be term/(2k+1)
+		 */
+		for ( int k=0; k<N; k++) {
+			Real term = tempTerm.divide(Real.valueOf(2*k+1));
+			pi = pi.plus(term);
+			tempTerm = tempTerm.divide(Real.valueOf(-3.0));
 		}
-		Real twelveRoot = Real.valueOf(12).sqrt();
-		p = p.times(twelveRoot);
-		System.out.println(p);
-
+		System.out.println(pi.toString());//.substring(0, digits+2));
+		System.out.println(pi.getPrecision());
 	}
 
 }

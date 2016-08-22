@@ -9,6 +9,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+/*
+ * Copyright (c) 2016, Tom Tillinghast. All rights reserved.
+ * 
+ */
 
 public class GameOfLife extends JFrame implements ActionListener {
 	static final int width =20;	
